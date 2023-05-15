@@ -11,6 +11,7 @@ export const toDoSlice = createSlice({
             state.todos.push(action.payload)
         },
         deleteItem: (state, action) => {
+            //need to add id and remove corrrect items
             state.todos.splice(action.payload, 1);
         },
     }
