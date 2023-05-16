@@ -15,14 +15,18 @@ const loanSchema = new schema({
 		lastName: String,
         phone: String,
 	}],
-	collection: "loanData",
-});
+	},	
+	{collection: "loanData"},
+);
 
 const loanData = mongoose.model('loanData', loanSchema);
 
 //check db connection
-mongoose.connect('mongodb://127.0.0.1:27017/test')
-  .then(() => console.log('Connected!'));
+mongoose.connect("mongodb+srv://admin:<password>@cluster0.lhdvcak.mongodb.net/?retryWrites=true&w=majority", {useNewUrlParser: true, useUnifiedTopology: true});
+
+const db = mongoose.connection;
+db.once("open", console.log("Connected to MongoDB"));
+db.on("error", console.error.bind(console, "connection error:"));
 
 app.get('/loan', (req, res) => {
 	loanData.find({}, (err, data) => {
